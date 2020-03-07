@@ -3,6 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
+import firebase from 'firebase'
+import VuexPersistence from 'vuex-persist'
+import FieryVue from 'fiery-vue'
+Vue.use(FieryVue)
+import jQuery from 'jquery'
+global.jQuery = jQuery
+global.$ = jQuery
 
 Vue.config.productionTip = false
 
@@ -23,4 +30,6 @@ new Vue({
     })
   }
 }).$mount('#app')
-  
+new VuexPersistence({
+  storage: window.localStorage
+})
