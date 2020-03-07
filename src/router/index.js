@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import Cadastro from '../views/Cadastro'
+import Demo from '../views/Demo'
 
 Vue.use(VueRouter)
 
@@ -9,6 +11,16 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: Cadastro
+  },
+  {
+    path: '/demo',
+    name: 'Demo',
+    component: Demo
   },
   {
     path: '/about',
