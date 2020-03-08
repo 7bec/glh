@@ -8,13 +8,18 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "fiery-vue": "^0.10.1",
     "firebase": "^7.10.0",
     "jquery": "^3.4.1",
     "material-design-icons-iconfont": "^5.0.1",
+    "pug-cli": "^1.0.0-alpha6",
+    "pug-plain-loader": "^1.0.0",
     "vue": "^2.6.11",
+    "vue-loaders": "^3.3.0",
     "vue-router": "^3.1.5",
+    "vue-the-mask": "^0.11.1",
     "vuetify": "^2.2.11",
     "vuex": "^3.1.2",
     "vuex-persist": "^2.2.0"

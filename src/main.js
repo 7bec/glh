@@ -7,6 +7,9 @@ import firebase from 'firebase'
 import VuexPersistence from 'vuex-persist'
 import FieryVue from 'fiery-vue'
 Vue.use(FieryVue)
+import 'vue-loaders/dist/vue-loaders.css'
+import VueLoaders from 'vue-loaders'
+Vue.use(VueLoaders)
 import jQuery from 'jquery'
 global.jQuery = jQuery
 global.$ = jQuery

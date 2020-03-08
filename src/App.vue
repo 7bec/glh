@@ -1,21 +1,24 @@
-<template>
-  <v-app>
-    <router-view/>
-  </v-app>
+<template lang='pug'>
+  v-app
+    v-app-bar(app color='#7bc4d1' dark v-if="currentRoute != '/primeiroacesso'")
+      v-container(style='position: absolute; left: 50%; transform: translate(-50%);')
+        img(height='90' src='../imagens/logo.png')
+      v-spacer
+    router-view
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
 
 export default {
   name: 'App',
 
-  components: {
-    HelloWorld,
-  },
-
   data: () => ({
     //
   }),
+  computed: {
+    currentRoute () {
+      return this.$route.path
+    }
+  }
 };
 </script>
