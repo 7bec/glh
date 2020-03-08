@@ -5,7 +5,7 @@
                 <v-card
                     max-width="500"
                     class="mx-auto"
-                    color="black"
+
                 >
                 <v-card-title style="color:white;" >Pais</v-card-title>
                     <v-list >
