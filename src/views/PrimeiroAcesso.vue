@@ -68,7 +68,7 @@
                         v-scale-transition(hide-on-leave)
                           v-btn.mt-3.medium(v-show="step === 2" :disabled='typingPhrase' color="#B700A5" dark @click='sendNumProc()' style='font-family: Montserrat,sans-serif; font-weight: 400') Continuar
                         v-scale-transition(hide-on-leave)  
-                          v-btn.mt-3.medium(v-show="step === 3" :disabled='typingPhrase' color="#B700A5" dark @click='toList()') Buscar!
+                          v-btn.mt-3.medium(v-show="step === 3" :disabled='typingPhrase' color="#B700A5" dark @click='toList()' style='font-family: Montserrat,sans-serif; font-weight: 400') Buscar!
         v-row.ma-0.pa-0(justify='end' align='center')
           img(v-if='step == 0' style='height: 40vh;' src='../../imagens/acenando.png')
           transition(name='fade-out')  
@@ -81,12 +81,15 @@
                 v-col(align='center')
                   vue-loaders(name="line-scale-pulse-out" color="#B700A5" scale="1")
                 v-col(align='center')
-                  span.subheading Realizando busca...
+                  span.subheading Realizando verificação...
 </template>
 
 <script>
 import { mask } from 'vue-the-mask'
+import firebase from 'firebase'
+import axios from 'axios'
 export default {
+  fiery: true,
   directives: {
     mask
   },
@@ -96,6 +99,7 @@ export default {
       typingPhrase: false,
       step: 0,
       numProc: '',
+      numProcSend: '',
       valid: true,
       requiredRules: [
         v => !!v || 'Campo obrigatório'
@@ -108,13 +112,28 @@ export default {
     await this.firstAccessSteps()
   },
   methods: {
-    toList () {
+    async toList () {
+      const self = this
+      console.log(this.numProcSend)
+      await axios.post(`https://us-central1-global-legal-hack.cloudfunctions.net/initSearch`, { "numProcesso": self.numProcSend }, { headers: { 'Content-Type': 'application/json' } })
       this.$router.push('/listHome')
     },
     async sendNumProc () {
+      const self = this
       this.isLoading = true
-      await this.nextStep()
-      this.isLoading = false
+      await this.searchForProccess()
+    },
+    async searchForProccess () {
+      setTimeout(() => {
+        this.$fiery(firebase.firestore().collection('pais'), {
+          query: m => m.where('numProcesso', '==', this.numProc),
+          onSuccess: async (doc) => {
+            this.isLoading = false
+            this.numProcSend = this.numProc
+            await this.nextStep()
+          }
+        })
+      }, 1000) 
     },
     async firstAccessSteps () {
       await this.typePhrase(`Olá, bem-vindo ao Adote. `, 700, false)
