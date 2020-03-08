@@ -100,6 +100,12 @@
                     </v-flex>
                     <v-flex>
                         <v-text-field
+                            label="Vara"
+                            v-model="vara"
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex>
+                        <v-text-field
                             label="Idade da criança"
                             v-model="idade_criança"
                         ></v-text-field>
@@ -229,6 +235,7 @@ export default {
             doenca_tratavel2:false,
             doenca_intratavel2:false,
             deficiencia_mental2:false,
+            vara:''
 
         }
     },
@@ -259,6 +266,7 @@ export default {
             this.$fires.filhos.add({
                 creation_timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 nome_criança:this.nomeCrianca,
+                vara: this.vara,
                 idade_criança: parseInt(this.idade_criança),
                 cor_olho: this.corOlho2,
                  cor_cabelo: this.tipo_cabelo2,
@@ -292,6 +300,8 @@ export default {
             this.pcd=false
             this.cor_pele=''
             this.idade_criança=''
+            this.qtdCrianca=''
+
 
              this.corOlho2=''
             this.corCabelo2=''
