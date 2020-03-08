@@ -114,8 +114,9 @@ export default {
   methods: {
     async toList () {
       const self = this
-      console.log(this.numProcSend)
-      await axios.post(`https://us-central1-global-legal-hack.cloudfunctions.net/initSearch`, { "numProcesso": self.numProcSend }, { headers: { 'Content-Type': 'application/json' } })
+      var intProc = parseInt(this.numProcSend)
+      console.log(intProc)
+      await firebase.firestore().doc(`config/index`).set({ active: true, numProcesso: intProc }, { merge: true })
       this.$router.push('/listHome')
     },
     async sendNumProc () {
